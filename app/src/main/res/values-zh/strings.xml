@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">广播工具</string>
+
+    <string name="send">发送</string>
+    <string name="register">注册</string>
+    <string name="receive">接收</string>
+    <string name="all_delete">清空数据</string>
+    <string name="delete">删除</string>
+
+    <string name="addParam">添加参数</string>
+    <string name="sendBroadcast">发送广播</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="add">添加</string>
+    <string name="not">不是</string>
+
+    <string name="register_broadcast">注册广播</string>
+    <string name="current_register_broadcast">当前注册接收的广播：</string>
+
+    <string name="msg_value_type_error">Value类型错误</string>
+    <string name="msg_key_empty">Key不能为空</string>
+    <string name="msg_value_empty">Value不能为空</string>
+    <string name="msg_action_empty">Action不能为空</string>
+    <string name="msg_param_error">广播参数错误</string>
+    <string name="msg_send_broadcast_success">广播发送成功</string>
+    <string name="msg_send_broadcast_fail">广播发送失败</string>
+    <string name="msg_action_exist">该Action已注册</string>
+
+</resources>

@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">BroadcastTool</string>
+
+    <string name="send">Send</string>
+    <string name="register">Register</string>
+    <string name="receive">Receive</string>
+    <string name="all_delete">All Delete</string>
+    <string name="delete">Delete</string>
+
+    <string name="addParam">Add Param</string>
+    <string name="sendBroadcast">SendBroadcast</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="value" translatable="false">Value</string>
+    <string name="not">not</string>
+
+    <string name="register_broadcast">Register Broadcast</string>
+    <string name="current_register_broadcast">Current register broadcast:</string>
+
+
+
+    <string-array name="paramType">
+        <item>String</item>
+        <item>Int</item>
+        <item>Long</item>
+        <item>Float</item>
+        <item>Double</item>
+        <item>Boolean</item>
+    </string-array>
+
+
+    <string name="msg_key_empty">Key can\'t be empty</string>
+    <string name="msg_value_empty">Value can\'t be empty</string>
+    <string name="msg_action_empty">Action can\'t be empty</string>
+    <string name="msg_value_type_error">Value type error</string>
+    <string name="msg_param_error">Broadcast param error</string>
+    <string name="msg_send_broadcast_success">Broadcast send success</string>
+    <string name="msg_send_broadcast_fail">Broadcast send fail</string>
+    <string name="msg_action_exist">Action has been registered</string>
+</resources>
