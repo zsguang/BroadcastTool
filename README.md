@@ -1,6 +1,6 @@
 ## BroadcastTool
 
-An [APP](https://github.com/SmallHorseshoe/BroadcastTool/releases/download/v1.0/BroadcastTool_v1.0_1.apk) tool that can conveniently send Android broadcasts.
+An [APP](https://github.com/SmallHorseshoe/BroadcastTool/releases/download/v1.0/BroadcastTool_v1.0_1.apk) tool that can conveniently send and receive Android broadcasts.
 
 
 <div style="display: flex;">
