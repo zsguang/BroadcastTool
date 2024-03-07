@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         pagerAdapter = PagerAdapter(supportFragmentManager)
         val viewPager: ViewPager = binding.viewPager.apply {
-            offscreenPageLimit = 3
+            offscreenPageLimit = 2
             adapter = pagerAdapter
         }
         binding.tabLayout.setupWithViewPager(viewPager)

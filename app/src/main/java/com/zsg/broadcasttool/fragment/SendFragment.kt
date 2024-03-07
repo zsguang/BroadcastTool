@@ -2,11 +2,17 @@ package com.zsg.broadcasttool.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -172,10 +178,6 @@ class SendFragment : Fragment() {
         val etValue = itemView.findViewById<EditText>(R.id.etValue)
         val ivDelete = itemView.findViewById<View>(R.id.ivDelete)
 
-        spType.setSelection(type.ordinal)
-        etKey.setText(key)
-        etValue.setText(value)
-
         typeViewList.add(spType)
         keyViewList.add(etKey)
         valueViewList.add(etValue)
@@ -185,13 +187,71 @@ class SendFragment : Fragment() {
             keyViewList.remove(etKey)
             valueViewList.remove(etValue)
         }
+        spType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                /*
+                <item>String</item>
+                <item>Int</item>
+                <item>Long</item>
+                <item>Float</item>
+                <item>Double</item>
+                <item>Boolean</item>
+                */
+                if (position == ParamEntity.ParamType.BOOLEAN.ordinal) {
+                    // Boolean类型，取消键盘输入，改为点击选择true/false
+                    etValue.isFocusable = false
+                    etValue.isFocusableInTouchMode = false
+                    if (etValue.text.toString() != "true" && etValue.text.toString() != "false") {
+                        etValue.setText("")
+                    }
+                    etValue.setOnClickListener { v: View ->
+                        val popupMenu = PopupMenu(activity!!, v, Gravity.START)
+                        popupMenu.menuInflater.inflate(R.menu.item_true_false, popupMenu.menu)
+                        popupMenu.setOnMenuItemClickListener { it: MenuItem ->
+                            if (it.itemId == R.id.item_true) {
+                                etValue.setText("true")
+                            } else if (it.itemId == R.id.item_false) {
+                                etValue.setText("false")
+                            }
+                            true
+                        }
+                        popupMenu.show()
+                    }
+                } else {
+                    etValue.isFocusable = true
+                    etValue.isFocusableInTouchMode = true
+                    etValue.setOnClickListener { }
+                }
+                when (ParamEntity.ParamType.values()[position]) {
+                    ParamEntity.ParamType.STRING -> etValue.inputType = InputType.TYPE_CLASS_TEXT
+                    ParamEntity.ParamType.INT -> etValue.inputType = InputType.TYPE_CLASS_NUMBER
+                    ParamEntity.ParamType.LONG -> etValue.inputType = InputType.TYPE_CLASS_NUMBER
+                    ParamEntity.ParamType.FLOAT -> etValue.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+                    ParamEntity.ParamType.DOUBLE -> etValue.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+                    ParamEntity.ParamType.BOOLEAN -> etValue.inputType = InputType.TYPE_NULL
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
+        spType.setSelection(type.ordinal)
+        etKey.setText(key)
+        etValue.setText(value)
 
         binding.extraParamView.addView(itemView)
     }
 
     fun clearAll() {
-        historyAdapter.clearAll()
-        SPUtils.getInstance(AppContext.context).setSPString(AppContext.KEY_HISTORY_BROADCASTS, "[]")
+        AlertDialog.Builder(requireActivity())
+            .setTitle(getString(R.string.msg_confirm_clear_all_send_history))
+            .setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+                historyAdapter.clearAll()
+                SPUtils.getInstance(AppContext.context).setSPString(AppContext.KEY_HISTORY_BROADCASTS, "[]")
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
 }

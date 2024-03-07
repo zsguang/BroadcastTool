@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:maxLines="20"
         android:singleLine="false"
+        android:textSize="12sp"
         android:typeface="monospace"
         android:visibility="gone" />
 

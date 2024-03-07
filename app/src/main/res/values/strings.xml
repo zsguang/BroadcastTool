@@ -38,4 +38,5 @@
     <string name="msg_send_broadcast_success">Broadcast send success</string>
     <string name="msg_send_broadcast_fail">Broadcast send fail</string>
     <string name="msg_action_exist">Action has been registered</string>
+    <string name="msg_confirm_clear_all_send_history">Confirm clear all send history?</string>
 </resources>

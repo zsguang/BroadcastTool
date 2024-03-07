@@ -25,5 +25,6 @@
     <string name="msg_send_broadcast_success">广播发送成功</string>
     <string name="msg_send_broadcast_fail">广播发送失败</string>
     <string name="msg_action_exist">该Action已注册</string>
+    <string name="msg_confirm_clear_all_send_history">确定清空所有发送历史记录？</string>
 
 </resources>
