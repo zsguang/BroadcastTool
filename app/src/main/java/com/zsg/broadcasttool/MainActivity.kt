@@ -1,10 +1,14 @@
 package com.zsg.broadcasttool
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -16,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
 
+    private val handler = Handler(Looper.getMainLooper())
     private lateinit var pagerAdapter: PagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +60,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 收起键盘
+        handler.postDelayed({
+            val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        }, 200)
     }
 
 }

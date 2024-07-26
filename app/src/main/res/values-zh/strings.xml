@@ -20,6 +20,7 @@
     <string name="msg_value_type_error">Value类型错误</string>
     <string name="msg_key_empty">Key不能为空</string>
     <string name="msg_value_empty">Value不能为空</string>
+    <string name="msg_value_error">Value数据错误</string>
     <string name="msg_action_empty">Action不能为空</string>
     <string name="msg_param_error">广播参数错误</string>
     <string name="msg_send_broadcast_success">广播发送成功</string>

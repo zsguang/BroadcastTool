@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +28,7 @@ class ReceiverFragment : Fragment() {
     private var _binding: FragmentReceiverBinding? = null
     private val binding get() = _binding!!
     private val gson = Gson()
+    private val handler = Handler(Looper.getMainLooper())
 
     private val registerList: MutableList<BroadcastReceiver> = mutableListOf() // 记录注册的广播接收器
     private val registerStateMap = mutableMapOf<BroadcastReceiver, Boolean>() // 记录广播接收器的注册状态
@@ -95,15 +98,19 @@ class ReceiverFragment : Fragment() {
         val ivDelete = view.findViewById<View>(R.id.ivDelete) as ImageView
 
         val receiver = object : BroadcastReceiver() {
-            override fun onReceive(p0: Context?, p1: Intent?) {
+            override fun onReceive(context: Context?, intent: Intent?) {
                 var text = ""
-                p1?.extras?.keySet()?.forEach {
-                    text += "\"" + it + "\" : " + p1.extras?.get(it) + "\n"
+                if (intent == null || intent.action == null) return
+                if (intent.extras != null) {
+                    intent.extras?.keySet()?.forEach {
+                        text += "\"" + it + "\" : " + intent.extras?.get(it) + "\n"
+                    }
                 }
-                if (p1 != null && p1.action != null) {
+                handler.post {
                     binding.rvReceive.scrollToPosition(0)
-                    receiverAdapter.addReceiver(p1.action!!, text.trimEnd())
+                    receiverAdapter.addReceiver(intent.action!!, text.trimEnd())
                 }
+
             }
         }
         if (isRegister) {

@@ -27,6 +27,7 @@
         <item>Float</item>
         <item>Double</item>
         <item>Boolean</item>
+        <item>IntArray</item>
     </string-array>
 
 
@@ -34,6 +35,7 @@
     <string name="msg_value_empty">Value can\'t be empty</string>
     <string name="msg_action_empty">Action can\'t be empty</string>
     <string name="msg_value_type_error">Value type error</string>
+    <string name="msg_value_error">Value error</string>
     <string name="msg_param_error">Broadcast param error</string>
     <string name="msg_send_broadcast_success">Broadcast send success</string>
     <string name="msg_send_broadcast_fail">Broadcast send fail</string>

@@ -12,6 +12,7 @@ data class ParamEntity(
         FLOAT,
         DOUBLE,
         BOOLEAN,
+        INT_ARRAY,
     }
 
     constructor(type: String, key: String, value: String) : this() {
@@ -28,9 +29,7 @@ data class ParamEntity(
 
         if (type != other.type) return false
         if (key != other.key) return false
-        if (value != other.value) return false
-
-        return true
+        return value == other.value
     }
 
     override fun hashCode(): Int {

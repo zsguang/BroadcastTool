@@ -141,6 +141,16 @@ class SendFragment : Fragment() {
                             }
                             intent.putExtra(key, value.toBoolean())
                         }
+                        ParamEntity.ParamType.INT_ARRAY -> {
+                            val intList = value.split(" ").mapNotNull { it.toIntOrNull() }
+                            if (intList.size == value.split(" ").size) {
+                                intent.putExtra(key, intList.toIntArray())
+                            } else {
+                                (valueViewList[i] as EditText).error = getString(R.string.msg_value_error)
+                                flag = false
+                            }
+                            intent.putExtra(key, intList.toIntArray())
+                        }
 
                         else -> intent.putExtra(key, value)
                     }
@@ -196,6 +206,7 @@ class SendFragment : Fragment() {
                 <item>Float</item>
                 <item>Double</item>
                 <item>Boolean</item>
+                <item>IntArray</item>
                 */
                 if (position == ParamEntity.ParamType.BOOLEAN.ordinal) {
                     // Boolean类型，取消键盘输入，改为点击选择true/false
@@ -229,6 +240,7 @@ class SendFragment : Fragment() {
                     ParamEntity.ParamType.FLOAT -> etValue.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
                     ParamEntity.ParamType.DOUBLE -> etValue.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
                     ParamEntity.ParamType.BOOLEAN -> etValue.inputType = InputType.TYPE_NULL
+                    ParamEntity.ParamType.INT_ARRAY -> etValue.inputType = InputType.TYPE_CLASS_TEXT
                 }
             }
 
